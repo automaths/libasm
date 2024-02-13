@@ -1,17 +1,18 @@
 NASM := nasm
 LD := ld
 NASMFLAGS := -f elf64
-SRC := example.s
+SRC := main.s \
+		ft_strlen.s
 NAME := test
 OBJ := $(SRC:.s=.o)
 
 all: $(NAME)
 
-$(OBJ): $(SRC)
-		$(NASM) $(NASMFLAGS) $< -o $@
+%.o: %.s
+	$(NASM) $(NASMFLAGS) $< -o $@
 
 $(NAME): $(OBJ)
-		$(LD) $^ -o $@
+	$(LD) $^ -o $@
 
 clean:
 		rm -f $(OBJ)
