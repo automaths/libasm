@@ -2,7 +2,9 @@ NASM := nasm
 LD := ld
 NASMFLAGS := -f elf64
 SRC := main.s \
-		ft_strlen.s
+		ft_strlen.s \
+		ft_strcmp.s \
+		ft_write.s
 NAME := test
 OBJ := $(SRC:.s=.o)
 
