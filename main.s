@@ -15,12 +15,12 @@ section .data
     test_ft_strcmp_empty_one db '', 0
     test_ft_strcmp_empty_two db '', 0
     test_ft_strcmp_string_one db 'Hello World!', 0
+    test_ft_strcmp_string_one_same db 'Hello World!', 0
     test_ft_strcmp_string_two db 'Hello Vorld!', 0
     test_ft_strcmp_string_three db 'Hello Uorld!', 0
 
     result_ft_strcmp_empty_both db 'ft_strcmp fail on two empty args', 0
-    result_ft_strcmp_empty_first db 'ft_strcmp fail on first empty arg', 0
-    result_ft_strcmp_empty_second db 'ft_strcmp fail on second empty arg', 0
+    result_ft_strcmp_same db 'ft_strcmp fail on identical strings', 0
     result_ft_strcmp_comparison db 'ft_strcmp fail on string comparison', 0
 
     test_ft_strcpy_empty_one db '', 0
@@ -29,6 +29,7 @@ section .data
     test_ft_strcpy_string_two db 'Ciaoo Bello!', 0
 
     result_ft_strcpy_empty_both db 'ft_strcpy fail on two empty args', 0
+    result_ft_strcpy_same db 'ft_strcpy fail on two identical strings', 0
     result_ft_strcpy_empty_first db 'ft_strcpy fail on first empty arg', 0
     result_ft_strcpy_empty_second db 'ft_strcpy fail on second empty arg', 0
     result_ft_strcpy_copy db 'ft_strcpy fail on string copy', 0
@@ -71,8 +72,12 @@ _start:
     cmp rax, 0
     jne .ft_strcmp_empty_both
 
-    ; ft_strcmp : check empty string first arg
-    ; ft_strcmp : check empty string second arg
+    ; ft_strcmp : check two same strings
+    mov rdi, test_ft_strcmp_string_one
+    mov rsi, test_ft_strcmp_string_one_same
+    call ft_strcmp
+    cmp rax, 0
+    jne .ft_strcmp_empty_both
 
     ; ft_strcmp : check multiple strings
     mov rdi, test_ft_strcmp_string_one
@@ -87,11 +92,6 @@ _start:
     call ft_strcmp
     cmp rax, 2
     jne .ft_strcmp_comparison
-
-
-
-
-
 
     ; ft_strcpy : check empty string
     ; ft_strcpy : check long string
@@ -109,16 +109,10 @@ _start:
     ; ft_strdup : check with empty string
     ; ft_strdup : check with long string
 
-
-
-
 .exit:
     mov rax, 60
     xor rdi, rdi
     syscall
-
-
-
 
 .ft_strlen_empty:
     mov rdi, result_ft_strlen_empty
@@ -138,14 +132,8 @@ _start:
     call ft_write
     jmp .exit
 
-.ft_strcmp_empty_first:
-    mov rdi, result_ft_strcmp_empty_first
-    mov rsi, 29
-    call ft_write
-    jmp .exit
-
-.ft_strcmp_empty_second:
-    mov rdi, result_ft_strcmp_empty_second
+.ft_strcmp_same:
+    mov rdi, result_ft_strcmp_same
     mov rsi, 29
     call ft_write
     jmp .exit
