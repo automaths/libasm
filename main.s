@@ -12,18 +12,15 @@ section .data
 section .text
     global _start
 
-_start:
-    
+_start:    
     mov rdi, 0
     mov rsi, output_buffer
     mov rdx, 10
     ;rdi fd, rsi buffer, rdx size
     call ft_read
-    
     mov rdi, output_buffer
     mov rsi, 6
     call ft_write
-
 
     mov rax, 60
     xor rdi, rdi

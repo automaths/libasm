@@ -1,22 +1,23 @@
 NASM := nasm
 LD := ld
-NASMFLAGS := -f elf64
-SRC := main.s \
-		ft_strlen.s \
+NASMFLAGS := -f elf64 -g
+SRC := ft_strlen.s \
 		ft_strcmp.s \
 		ft_write.s \
 		ft_strcpy.s \
-		ft_read.s
+		ft_read.s \
+		ft_strdup.s
 NAME := test
 OBJ := $(SRC:.s=.o)
 
 all: $(NAME)
+	ar rcs libasm.a $(OBJ)
 
 %.o: %.s
 	$(NASM) $(NASMFLAGS) $< -o $@
 
 $(NAME): $(OBJ)
-	$(LD) $^ -o $@
+	$(LD) $^ -o $@ -lc
 
 clean:
 		rm -f $(OBJ)
