@@ -6,7 +6,8 @@ SRC := ft_strlen.s \
 		ft_write.s \
 		ft_strcpy.s \
 		ft_read.s \
-		ft_strdup.s
+		main.s \
+		print_number.s
 NAME := test
 OBJ := $(SRC:.s=.o)
 
@@ -17,7 +18,7 @@ all: $(NAME)
 	$(NASM) $(NASMFLAGS) $< -o $@
 
 $(NAME): $(OBJ)
-	$(LD) $^ -o $@ -lc
+	$(LD) $^ -o $@
 
 clean:
 		rm -f $(OBJ)
