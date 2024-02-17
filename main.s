@@ -1,5 +1,9 @@
 extern ft_strcpy
 extern ft_write
+extern ft_read
+
+section .bss
+    output_buffer resb 64
 
 section .data
     hello db 'Hello World!', 0
@@ -10,13 +14,13 @@ section .text
 
 _start:
     
-    mov rdi, hello
-    mov rsi, hello2
-    mov rdx, 6
-    call ft_strcpy
+    mov rdi, 0
+    mov rsi, output_buffer
+    mov rdx, 10
+    ;rdi fd, rsi buffer, rdx size
+    call ft_read
     
-    ;mov rdi, hello
-    ;mov rsi, 8
+    mov rdi, output_buffer
     mov rsi, 6
     call ft_write
 
