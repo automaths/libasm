@@ -6,19 +6,20 @@ SRC := ft_strlen.s \
 		ft_write.s \
 		ft_strcpy.s \
 		ft_read.s \
-		main.s \
-		print_number.s
+		ft_strdup.s \
+		main.s 
 NAME := test
 OBJ := $(SRC:.s=.o)
 
 all: $(NAME)
-	ar rcs libasm.a $(OBJ)
+	# $(NASM) $(NASMFLAGS) $(OBJ) -o $(NAME)
+	# ar rcs libasm.a $(OBJ)
 
 %.o: %.s
 	$(NASM) $(NASMFLAGS) $< -o $@ -lc
 
 $(NAME): $(OBJ)
-	$(LD) $^ -o $@
+	$(LD) -dynamic-linker /lib64/ld-linux-x86-64.so.2 $^ -o $@ -lc
 
 clean:
 		rm -f $(OBJ)

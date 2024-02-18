@@ -3,6 +3,7 @@ extern ft_write
 extern ft_strlen
 extern ft_strcmp
 extern ft_read
+extern ft_strdup
 
 section .data
 
@@ -52,7 +53,9 @@ section .data
     ; ft_read : check the return value
 
     ; ft_strdup : check with empty string
+    test_ft_strdup_empty db '', 0
     ; ft_strdup : check with long string
+    test_ft_strdup_string db 'abcdefghijklmnopqrstuvwxyz', 0
     
 
 section .text
@@ -184,11 +187,21 @@ _start:
     ; ft_read : check the return value
 
     ; ft_strdup : check with empty string
+
+    mov rdi, test_ft_strdup_empty
+    call ft_strdup
+
     ; ft_strdup : check with long string
 
-    ; test rax, rax ; Check if rax contains an error code
-    ; js .error ; If negative, jump to error handling
-    ; to access errno: mov rdi, rax; call perror
+    ;xor rax, rax
+
+    ;mov rdi, test_ft_strdup_string
+    ;call ft_strdup
+
+    ;mov rdi, 1
+    ;mov rsi, rax
+    ;mov rdx, 33
+    ;call ft_write
 
 .exit:
     mov rax, 60
