@@ -7,6 +7,8 @@ ft_strcpy:
     push    rbp
     mov     rbp, rsp
     xor     rcx, rcx
+    test rdi, rdi 
+    je .end
     test rsi, rsi 
     je .end
     ;rdi dest, rsi src, rdx size

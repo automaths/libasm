@@ -1,5 +1,4 @@
-section .data
-    test_coucou db 'Coucou magl', 0
+extern	__errno_location
 
 section .text
     global ft_write
@@ -10,20 +9,15 @@ ft_write:
     mov rbp, rsp
     mov rax, 1      ; write
     syscall
-
     test rax, rax       
     js .error
-
     pop rbp
     ret
 
 .error:
-
-    ;mov rax, 1
-    ;mov rdi, 1
-    ;mov rsi, test_coucou
-    ;mov rdx, 15
-    ;syscall
+    mov rdi, 1
+	call __errno_location ; send ptr to errno on rax
+	mov	[rax], rdi
+	mov	rax, -1
     pop rbp
-    mov rax, -1
     ret

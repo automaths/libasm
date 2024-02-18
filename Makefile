@@ -12,14 +12,13 @@ NAME := test
 OBJ := $(SRC:.s=.o)
 
 all: $(NAME)
-	# $(NASM) $(NASMFLAGS) $(OBJ) -o $(NAME)
-	# ar rcs libasm.a $(OBJ)
+	ar rcs libasm.a $(OBJ)
 
 %.o: %.s
 	$(NASM) $(NASMFLAGS) $< -o $@ -lc
 
 $(NAME): $(OBJ)
-	$(LD) -dynamic-linker /lib64/ld-linux-x86-64.so.2 $^ -o $@ -lc
+	$(LD) -dynamic-linker /lib64/ld-linux-x86-64.so.2 $^ -o $@ -lc 
 
 clean:
 		rm -f $(OBJ)
