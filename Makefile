@@ -15,7 +15,7 @@ all: $(NAME)
 	ar rcs libasm.a $(OBJ)
 
 %.o: %.s
-	$(NASM) $(NASMFLAGS) $< -o $@
+	$(NASM) $(NASMFLAGS) $< -o $@ -lc
 
 $(NAME): $(OBJ)
 	$(LD) $^ -o $@

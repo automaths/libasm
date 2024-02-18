@@ -1,16 +1,29 @@
+section .data
+    test_coucou db 'Coucou magl', 0
+
 section .text
     global ft_write
 
 ft_write:
-    ; rdi: addr, rsi: length
+    ; rdi fd, rsi: addr, rdx: length
     push rbp
     mov rbp, rsp
-    mov rcx, rdi ; tmp arg1
-    mov r8, rsi ; tmp arg2
     mov rax, 1      ; write
-    mov rdi, 1      ; stdout
-    mov rsi, rcx    ; address
-    mov rdx, r8    ; length
     syscall
+
+    test rax, rax       
+    js .error
+
     pop rbp
+    ret
+
+.error:
+
+    ;mov rax, 1
+    ;mov rdi, 1
+    ;mov rsi, test_coucou
+    ;mov rdx, 15
+    ;syscall
+    pop rbp
+    mov rax, -1
     ret
