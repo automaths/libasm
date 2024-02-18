@@ -94,7 +94,18 @@ _start:
     jne .ft_strcmp_comparison
 
     ; ft_strcpy : check empty string
+    mov rdi, test_ft_strcpy_empty_one
+    mov rsi, test_ft_strcpy_empty_two
+    call ft_strcpy
+
     ; ft_strcpy : check long string
+    mov rdi, test_ft_strcpy_string_one
+    mov rsi, test_ft_strcpy_string_two
+    mov rdx, 13
+    call ft_strcpy
+    call ft_strcmp
+    cmp rax, 0
+    jne .ft_strcpy_empty_copy
 
     ; ft_write : check stdout
     ; ft_write : check open file descriptor
@@ -146,18 +157,6 @@ _start:
 
 .ft_strcpy_empty_both:
     mov rdi, result_ft_strcpy_empty_both
-    mov rsi, 29
-    call ft_write
-    jmp .exit
-
-.ft_strcpy_empty_first:
-    mov rdi, result_ft_strcpy_empty_first
-    mov rsi, 29
-    call ft_write
-    jmp .exit
-
-.ft_strcpy_empty_second:
-    mov rdi, result_ft_strcpy_empty_second
     mov rsi, 29
     call ft_write
     jmp .exit
