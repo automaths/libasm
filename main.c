@@ -34,10 +34,10 @@ int main() {
     assert(ft_strcmp("Hello, World!", "Hello, Vorld!") == 1);
     // assert(ft_strcmp("Hello, Vorld!", "Hello, World!") == 1);
     assert(ft_strcmp("Hello, World!", "Hello, Uorld!") == 2);
-    printf("Ft_strcmp empty first argument : %d\n", ft_strcmp("", "Hello, World!"));
-    printf("Strcmp empty first argument : %d\n", strcmp("", "Hello, World!"));
-    printf("Ft_strcmp empty second argument : %d\n", ft_strcmp("Hello, World!", ""));
-    printf("Strcmp empty second argument : %d\n", strcmp("Hello, World!", ""));
+    printf("Ft_strcmp empty first argument : %d\n", ft_strcmp("\0", "Hello, World!"));
+    printf("Strcmp empty first argument : %d\n", strcmp("\0", "Hello, World!"));
+    printf("Ft_strcmp empty second argument : %d\n", ft_strcmp("Hello, World!", "\0"));
+    printf("Strcmp empty second argument : %d\n", strcmp("Hello, World!", "\0"));
     assert(ft_strcmp("", "") == 0);
 
     int ret = ft_write(1, "From write : Hello, World!", 26);
