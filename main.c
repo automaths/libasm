@@ -11,7 +11,7 @@ int ft_strlen(char *str);
 int ft_write(int fd, char *str, int len);
 int ft_read(int fd, char *str, int len);
 int ft_strcmp(char *s1, char *s2);
-char *ft_strcpy(char *dest, char *src, int n);
+char *ft_strcpy(char *dest, char *src);
 char *ft_strdup(char *src);
 
 int main() {
@@ -25,14 +25,13 @@ int main() {
     char *dest = (char *)malloc(130);
     char *src = "Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!";
 
-    ft_strcpy(dest, "", 130);
-    // ft_strcpy("", "", 130);
-    ft_strcpy(dest, src, 130);
+    ft_strcpy(dest, "");
+    ft_strcpy(dest, src);
     assert(strcmp(dest, src) == 0);
 
     assert(ft_strcmp("Hello, World!", "Hello, World!") == 0);
     assert(ft_strcmp("Hello, World!", "Hello, Vorld!") == 1);
-    // assert(ft_strcmp("Hello, Vorld!", "Hello, World!") == 1);
+    assert(ft_strcmp("Hello, Vorld!", "Hello, World!") == -1);
     assert(ft_strcmp("Hello, World!", "Hello, Uorld!") == 2);
     assert(ft_strcmp("", "Hello, World!") == -72);
     assert(ft_strcmp("Hello, World!", "") == 72);
