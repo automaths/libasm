@@ -1,31 +1,30 @@
-NASM := nasm
-LD := ld
-NASMFLAGS := -f elf64 -g
-SRC := ft_strlen.s \
-		ft_strcmp.s \
-		ft_write.s \
+NAME = libasm.a
+SRC = ft_strlen.s \
 		ft_strcpy.s \
+		ft_strcmp.s \
 		ft_read.s \
-		ft_strdup.s \
-		main.s 
-NAME := test
-OBJ := $(SRC:.s=.o)
+		ft_write.s \
+		ft_strdup.s 
+NASMFLAG = nasm -g -f elf64 
+OBJ = ${SRC:.s=.o}
 
 all: $(NAME)
-	ar rcs libasm.a $(OBJ)
 
-%.o: %.s
-	$(NASM) $(NASMFLAGS) $< -o $@ -lc
+.s.o:
+		$(NASMFLAG) $<
+		ar rcs $(NAME) $@
 
-$(NAME): $(OBJ)
-	$(LD) -dynamic-linker /lib64/ld-linux-x86-64.so.2 $^ -o $@ -lc 
+$(NAME):	$(OBJ)
+
+test:	main.c $(NAME)
+	gcc -g -no-pie main.c $(NAME) -o unit_test
 
 clean:
-		rm -f $(OBJ)
+		rm -rf $(OBJ)
 
 fclean: clean
-		rm -f $(NAME)
+		rm -rf $(NAME) unit_test
 
-re: fclean all
+re: fclean bin
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus
